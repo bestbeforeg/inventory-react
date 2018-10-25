@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Category from './Category/Category';
-import Collection from './Collection/Collection';
+import DetailsCategory from './Category/DetailsCategory';
+import DetailsCollection from './Collection/DetailsCollection';
 
 class Details extends Component {
     render(){
@@ -11,11 +11,11 @@ class Details extends Component {
                         <div className="card light-grey lighten-4">
                             <div className="card-content">
                                 <span className="card-title">Details</span>
-                                <Category/>
-                                <Collection/>
+                                <DetailsCategory/>
+                                <DetailsCollection/>
                             </div>
                             <div className="card-action">
-                                <a className="waves-effect waves-light btn">Edit</a>
+                                <button className="waves-effect waves-light btn">Edit</button>
                             </div>
                         </div>
                     </div>

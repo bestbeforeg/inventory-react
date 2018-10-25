@@ -9,9 +9,9 @@ const Navigation = () => {
                     TE91
                 </Link>
                 <ul className="right hide-on-med-and-down">
-                    <li><NavLink to='/'>Browse</NavLink></li>
+                    <li><NavLink to='/browse'>Browse</NavLink></li>
                     <li><NavLink to='/'>Add</NavLink></li>
-                    <li><NavLink to='/'>Logout</NavLink></li>
+                    <li><NavLink to='/signin'>Logout</NavLink></li>
                     <li><NavLink to='/' className="btn btn-floating blue lighten-1">ZD</NavLink></li>
                 </ul>
             </div>
