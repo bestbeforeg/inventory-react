@@ -19,7 +19,7 @@ class Signin extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form className="container" onSubmit={this.handleSubmit}>
                 <div className="row">
                     <div className="col s12 m12">
                         <div className="card light-grey lighten-4">

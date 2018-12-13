@@ -1,11 +1,13 @@
 import AuthReducer from './AuthReducer';
-import CategoryReducer from './CategoryReducer';
+import CreateCategoryReducer from './CreateCategoryReducer';
 import { combineReducers } from 'redux';
 import { firestoreReducer } from 'redux-firestore';
+import CollectionReducer from "./CollectionReducer";
 
 const RootReducer = combineReducers({
     auth: AuthReducer,
-    categories: CategoryReducer,
+    collection: CollectionReducer,
+    categories: CreateCategoryReducer,
     firestore: firestoreReducer,
 });
 

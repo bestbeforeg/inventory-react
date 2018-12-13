@@ -2,9 +2,10 @@
   "name": "warehouse_project_react",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/te91-inventory",
   "dependencies": {
-    "@material-ui/core": "^3.2.2",
     "firebase": "^5.5.5",
+    "history": "^4.7.2",
     "materialize-css": "^1.0.0-rc.2",
     "moment": "^2.22.2",
     "react": "^16.5.2",
@@ -17,7 +18,8 @@
     "redux-firebase": "^0.3.3",
     "redux-firestore": "^0.5.8",
     "redux-thunk": "^2.3.0",
-    "typeface-roboto": "0.0.54"
+    "typeface-roboto": "0.0.54",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -33,5 +35,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "standard": "^12.0.1"
+  }
 }
