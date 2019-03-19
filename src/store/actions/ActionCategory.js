@@ -11,8 +11,8 @@ export const createCategory = (entry) => {
           ...category
       }, { merge: true }).then(() => {
         dispatch({type: 'CREATE_CATEGORY', category});
-        // const path = `/${category.type === '0' ? 'category' : 'collection'}/${category.type}/${id}/${category.name}/${category.parent}`;
-        // history.push(path);
+        const path = `/${category.type === '0' ? 'category' : 'collection'}/${category.type}/${id}/${category.name}/${category.parent}`;
+        history.push(path);
       }).catch((error) => {
           dispatch({type: 'CREATE_CATEGORY_ERROR', error})
       });

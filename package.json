@@ -4,6 +4,11 @@
   "private": true,
   "homepage": "/te91-inventory",
   "dependencies": {
+    "@material-ui/core": "^3.7.1",
+    "@types/jest": "^23.3.10",
+    "@types/node": "^10.12.18",
+    "@types/react": "^16.7.18",
+    "@types/react-dom": "^16.0.11",
     "firebase": "^5.5.5",
     "history": "^4.7.2",
     "materialize-css": "^1.0.0-rc.2",
@@ -19,6 +24,7 @@
     "redux-firestore": "^0.5.8",
     "redux-thunk": "^2.3.0",
     "typeface-roboto": "0.0.54",
+    "typescript": "^3.2.2",
     "uuid": "^3.3.2"
   },
   "scripts": {

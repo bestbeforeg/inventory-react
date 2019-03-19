@@ -1,50 +1,42 @@
 import React from 'react';
-import M from 'materialize-css';
-import {renderSelectOptions} from '../../Utils/Utils';
-import {compose} from "redux";
-import connect from "react-redux/es/connect/connect";
-import {firestoreConnect} from "react-redux-firebase";
-import {editCategory} from "../../../store/actions/ActionCategory";
+import TextInput from "../Components/TextInput";
+import Select from "../Components/Select";
+import FormAbstract from "../FormAbstract";
 
+class FormEdit  extends FormAbstract {
 
-class FormEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      parent: '0',
-    };
+      formControls: {
+        name: {
+          value: this.props.name,
+          valid: true,
+          validationRules: {
+            isRequired: true
+          },
+        },
+        parent: {
+          value: this.props.parent,
+          options: this.props.categories,
+        }
+      },
+      valueChanged: false,
+    }
   }
 
-  componentDidMount(){
+  changeEditHandler = event => {
+    this.changeHandler(event);
+
+    const value = event.target.value;
+    const name = event.target.name;
+
     this.setState({
-      name: this.props.match.params.name,
-      type: this.props.match.params.id,
-      parent: this.props.match.params.parent,
-    });
-    M.FormSelect.init(this.select);
-    M.updateTextFields();
-  }
-
-  componentDidUpdate(){
-    M.FormSelect.init(this.select);
-  }
-
-  handleInputChange = (e, propName) => {
-    const property = propName ? propName : e.target.id;
-    this.setState({
-        [property]: e.target.value
+      valueChanged: value !== this.props[name],
     });
   };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.props.editCategory(this.state);
-  };
-
-  render () {
-    console.log(this.state);
-    this.props.categories && console.log("props", this.props.categories);
+  render() {
     return (
       <div className='details container'>
         <form onSubmit={this.handleSubmit}>
@@ -52,26 +44,30 @@ class FormEdit extends React.Component {
             <div className="col s12 m12">
               <div className="card light-grey lighten-4">
                 <div className="card-content">
-                  <h5 className="card-title">Add/Edit</h5>
+                  <h5 className="card-title">Edit</h5>
                   <div className="row">
-                    <div className="input-field col s12 m12">
-                      <input className="validate" id="name" defaultValue={this.props.match.params.name} type="text"  onChange={this.handleInputChange}/>
-                      <label htmlFor="name">Name</label>
-                    </div>
-                    {this.props.categories &&
-                    <div className="input-field col s12">
-                      <select  id="parent" ref={ (select) => {this.select = select} } defaultValue={this.props.match.params.parent} onChange={this.handleInputChange}>
-                        <option value="0">Root</option>
-                        {renderSelectOptions(this.props.categories)}
-                      </select>
-                      <label>Select parent category</label>
-                    </div>
-                    }
+                    <TextInput
+                      name="name"
+                      id="name"
+                      value={this.state.formControls.name.value}
+                      onChange={this.changeEditHandler}
+                      valid={this.state.formControls.name.valid}
+                      error='Input "Name" must not be empty!'
+                    />
+                    <Select
+                      name="parent"
+                      value={this.state.formControls.parent.value}
+                      onChange={this.changeEditHandler}
+                      options={this.state.formControls.parent.options}
+                    />
                   </div>
                 </div>
-                <div className="card-action">
-                  <button className="btn waves-effect waves-light" type="submit" name="action">Submit
-                    <i className="material-icons right">send</i>
+                <div className="card-action right-align">
+                  <button className={"btn waves-effect waves-light" +
+                          (!this.state.valueChanged ? " disabled" : this.state.formControls.name.valid ? " " : " disabled")}
+                          type="submit" name="action">
+                    Save
+                    <i className="material-icons right">check</i>
                   </button>
                 </div>
               </div>
@@ -83,21 +79,4 @@ class FormEdit extends React.Component {
   }
 }
 
-const MapStateToProps = (state) => {
-  return {
-    categories: state.firestore.ordered.categories
-  }
-};
-
-const MapDispatchToProps = (dispatch) => {
-  return {
-    editCategory: (category) => { dispatch(editCategory(category))  }
-  }
-};
-
-export default compose(
-  connect(MapStateToProps, MapDispatchToProps),
-  firestoreConnect([
-    {collection: 'categories'}
-  ]),
-)(FormEdit);
+export default FormEdit;
